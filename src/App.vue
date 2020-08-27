@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <!--  
-    <navbar />
     class="container" -->
-    <div >
+    <navbar />
+    <div class="container">
       <router-view/>
     </div>
     <Footer />
@@ -12,14 +12,14 @@
 
 <!-- -->
 <script>
-//import navbar from './components/Layouts/Navbar'
+import navbar from './components/Layouts/Navbar'
 import Footer from './components/Layouts/Footer'
 
 //
 export default {
   name: 'app',
   components: {
-    //navbar, 
+    navbar, 
     Footer,
   }
 }

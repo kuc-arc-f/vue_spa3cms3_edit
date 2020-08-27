@@ -1,6 +1,5 @@
 <template>
 <div class="task_index_wrap">
-    <navbar />
     <div class="container">
         <FlashMessage></FlashMessage>
         <div class="row" style="margin-top: 10px;">
@@ -10,33 +9,47 @@
                 <router-link :to="'/edit/new/'" class="btn btn-primary">Create
                 </router-link>
             </div>
-            <div class="col-sm-4" style="text-align: right;">
+            <div class="col-sm-4" style="text-align: left;">
                 <a id="download" href="" download="cms.json" class="btn btn-outline-primary btn-sm"
                 v-on:click="export_task()">Export
                 </a>                
-                &nbsp;&nbsp;
+                &nbsp;
                 <a href="" v-on:click="move_action('/edit/import');"
                     class="btn btn-outline-primary btn-sm">Import
                 </a>                 
+                &nbsp;
+                <button  v-on:click="delete_items();"
+                    class="btn btn-outline-danger btn-sm ml-2">Delete
+                </button>                 
             </div>
         </div>
-        <hr class="mt-2 mb-2" />
+        <!-- <hr class="mt-2 mb-2" /> -->
+        <table class="table table-hover mt-2">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Actions</th>
+            </tr>
+            </thead>            
+            <tbody>
+                <tr v-for="item in cms_items" v-bind:key="item.id">
+                    <td>
+                        <h3>
+                        <router-link :to="'/edit/show/' + item.id">{{ item.title }}</router-link>
+                        </h3>                        
+                        ID : {{ item.id }}
+                        , {{ item.created_at }}
+                        , Category : {{ item.category.name }}
+                    </td>
+                    <td>
+                        <router-link :to="'/edit/edit/' + item.id"
+                            class="btn btn-outline-primary btn-sm">Edit
+                        </router-link>                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <br />
-        <ul v-for="item in cms_items" v-bind:key="item.id">
-            <li>
-                <router-link :to="'/edit/show/' + item.id" style="margin-right: 10px; font-size: 1.4rem;">
-                    {{ item.title }}
-                </router-link>
-                <router-link :to="'/edit/edit/' + item.id"
-                    class="btn btn-outline-primary btn-sm">Edit
-                </router-link>                
-                <br />
-                ID : {{ item.id }}
-                , {{ item.created_at }}
-                , category : {{ item.category.name }}
-            </li>
-        </ul>
-        <hr />
     </div><!-- end_container -->
             
 </div>
@@ -58,13 +71,13 @@ import FlashMessage from '../../components/Layouts/FlashMessage'
 import Dexie from 'dexie';
 import LibDexie from '@/libs/LibDexie';
 import LibCmsEdit_3 from '@/libs/LibCmsEdit_3';
-import navbar from '@/components/Layouts/Navbar'
+// import navbar from '@/components/Layouts/Navbar'
 
 var db = null;
 //
 export default {
     mixins:[Mixin],
-    components: { FlashMessage, navbar },
+    components: { FlashMessage},
     created () {
         var config = LibCmsEdit_3.get_const()
         db = new Dexie( config.DB_NAME );
@@ -99,8 +112,6 @@ export default {
                 self.page_items = data
 //console.log( self.page_items )
             });       
-            // page_items
-
         },
         export_task: function(){
             var config = LibCmsEdit_3.get_const()
@@ -129,7 +140,18 @@ export default {
         move_action: function( action  ){
             this.set_exStorage(this.sysConst.KEY_NEXT_ACTION , action )
             window.location.href = this.sysConst.HTTP_URL
-        },                
+        },
+        delete_items: function(){
+            var s = "全てのデータを削除します。よろしいですか？バックアップが無い場合は復元できません"
+            if(window.confirm(s)){
+                db.cms_edit.clear()
+                db.pages.clear()            
+                db.category.clear()
+                this.set_exStorage(this.sysConst.KEY_NEXT_ACTION , "/edit" )
+                window.location.href = this.sysConst.HTTP_URL                
+//                this.$router.push('/edit') 
+            }
+        },                        
     }
 }
 </script>

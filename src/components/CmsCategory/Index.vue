@@ -1,6 +1,5 @@
 <template>
 <div class="task_index_wrap">
-    <navbar />
     <div class="container">
         <FlashMessage></FlashMessage>
         <div class="row" style="margin-top: 10px;">
@@ -48,7 +47,7 @@
 <script>
 import {Mixin} from '../../mixin'
 import FlashMessage from '../../components/Layouts/FlashMessage'
-import navbar from '@/components/Layouts/Navbar'
+//import navbar from '@/components/Layouts/Navbar'
 import Dexie from 'dexie';
 import LibDexie from '@/libs/LibDexie';
 import LibCmsEdit_3 from '@/libs/LibCmsEdit_3';
@@ -57,7 +56,7 @@ var db = null;
 //
 export default {
     mixins:[Mixin],
-    components: { FlashMessage ,navbar },
+    components: { FlashMessage  },
     created () {
         var config = LibCmsEdit_3.get_const()
         db = new Dexie( config.DB_NAME );

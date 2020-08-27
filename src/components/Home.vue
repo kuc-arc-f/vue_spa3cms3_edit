@@ -1,7 +1,9 @@
 <template>
     <div>
         <h1>Home</h1>
-        welcome, idx-kuc.netlify.app
+        <p>Welcome, cms3edit-kuc</p> <br />
+        <br />
+        <br />
     </div>
 </template>
 

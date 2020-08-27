@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-//import home from '../components/Home'
+import home from '../components/Home'
 import about from '../components/About'
-import top from '../components/Top'
+// import top from '../components/Top'
 import show from '../components/show'
 import page from '../components/page'
 
@@ -31,7 +31,7 @@ Vue.use(Router)
 export default new Router({
 	/* mode: 'history', */
 	routes: [
-		{ path: '/', component: top },
+		{ path: '/', component: home },
 		{ path: '/show/:id', component: show },
 		{ path: '/pages/:id', component: page },
 		{ path: '/about', component: about },
@@ -41,7 +41,7 @@ export default new Router({
 		{ path: '/edit/show/:id', component: CmsEdit2Show },
 		{ path: '/edit/edit/:id', component: CmsEdit2Edit },
 		{ path: '/edit/import', component: CmsEdit2Import },
-		//{ path: '/edit/test', component: CmsEdit2Test },
+//		{ path: '/edit/test', component: CmsEdit2Test },
 		/* CmsCategory */
 		{ path: '/cms_category/new', component: CmsCategoryNew },
 		{ path: '/cms_category', component: CmsCategory },

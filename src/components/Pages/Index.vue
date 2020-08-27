@@ -1,10 +1,9 @@
 <template>
 <div class="task_index_wrap">
-    <navbar />
     <div class="container">
         <FlashMessage></FlashMessage>
         <div class="row" style="margin-top: 10px;">
-            <div class="col-sm-4"><h3>Pages - ver3</h3>
+            <div class="col-sm-4"><h3>Pages</h3>
             </div>
             <div class="col-sm-4">
                 <router-link :to="'/edit/pages/new'" class="btn btn-primary">Create
@@ -51,13 +50,13 @@ import FlashMessage from '../../components/Layouts/FlashMessage'
 import Dexie from 'dexie';
 import LibDexie from '@/libs/LibDexie';
 import LibCmsEdit_3 from '@/libs/LibCmsEdit_3';
-import navbar from '@/components/Layouts/Navbar'
+// import navbar from '@/components/Layouts/Navbar'
 
 var db = null;
 //
 export default {
     mixins:[Mixin],
-    components: { FlashMessage, navbar },
+    components: { FlashMessage  },
     created () {
         var config = LibCmsEdit_3.get_const()
         db = new Dexie( config.DB_NAME );

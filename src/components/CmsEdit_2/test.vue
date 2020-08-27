@@ -6,6 +6,8 @@
         <hr />
         <button v-on:click="test1()">[ test1 ]</button>
         <hr />
+        <button v-on:click="delete_items()">[ test_delete ]</button>
+        <hr />
 
     </div>
 </template>
@@ -37,6 +39,15 @@ export default {
         test1: function(){
             for(var i = 1; i<= 1000; i++){
                 this.add_item(i)
+            }
+        },
+        delete_items: function(){
+            var s = "全てのデータを削除します。よろしいですか？バックアップが無い場合は復元できません"
+            if(window.confirm(s)){
+                db.cms_edit.clear()
+                db.pages.clear()            
+                db.category.clear()
+                this.$router.push('/edit') 
             }
         },
         add_item: function(num){
