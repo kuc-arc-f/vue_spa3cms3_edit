@@ -13,23 +13,32 @@
                 &nbsp;&nbsp;
             </div>
         </div>
-        <hr class="mt-2 mb-2" />
-        <br />
-        <ul v-for="item in category_items" v-bind:key="item.id">
-            <li>
-                <span style="margin-right: 10px; font-size: 1.4rem;">
-                    {{ item.name }}
-                </span>
-                &nbsp;&nbsp;
-                <router-link :to="'/cms_category/edit/' + item.id"
-                    class="btn btn-outline-primary btn-sm">Edit
-                </router-link>                
-                <br />
-                ID : {{ item.id }}
-                , {{ item.created_at }}
-            </li>
-        </ul>
-        <hr />
+        <table class="table table-hover mt-2 mb-5">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+            </thead> 
+            <tbody>
+                <tr v-for="item in category_items" v-bind:key="item.id">
+                    <td>
+                        <h3>
+                        <router-link :to="'/cms_category/edit/' + item.id">{{ item.name }}</router-link>
+                        </h3>                        
+                        ID : {{ item.id }}
+                        , {{ item.created_at }}
+                    </td>
+                    <td>
+                        <router-link :to="'/cms_category/edit/' + item.id"
+                            class="btn btn-outline-primary btn-sm">Edit
+                        </router-link>                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div><!-- end_container -->
        
 </div>

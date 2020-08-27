@@ -1,6 +1,6 @@
 <template>
 <div class="task_index_wrap">
-    <div class="container">
+    <div class="container mb-5">
         <FlashMessage></FlashMessage>
         <div class="row" style="margin-top: 10px;">
             <div class="col-sm-4"><h3>Pages</h3>
@@ -13,22 +13,33 @@
                 &nbsp;&nbsp;
             </div>
         </div>
-        <hr class="mt-2 mb-2" />
-        <br />
-        <ul v-for="item in page_items" v-bind:key="item.id">
-            <li>
-                <router-link :to="'/edit/pages/show/' + item.id" style="margin-right: 10px; font-size: 1.4rem;">
-                    {{ item.title }}
-                </router-link>
-                <router-link :to="'/edit/pages/edit/' + item.id"
-                    class="btn btn-outline-primary btn-sm">Edit
-                </router-link>                
-                <br />
-                ID : {{ item.id }}
-                , {{ item.created_at }}
-            </li>
-        </ul>
-        <hr />
+        <table class="table table-hover mt-2">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in page_items" v-bind:key="item.id">
+                    <td>
+                        <h3>
+                        <router-link :to="'/edit/pages/show/' + item.id">{{ item.title }}
+                        </router-link>
+                        </h3>                        
+                        ID : {{ item.id }}
+                        , {{ item.created_at }}
+                    </td>
+                    <td>
+                        <router-link :to="'/edit/pages/edit/' + item.id"
+                            class="btn btn-outline-primary btn-sm">Edit
+                        </router-link>                         
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div><!-- end_container -->
             
 </div>
