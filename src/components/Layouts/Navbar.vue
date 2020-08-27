@@ -13,7 +13,7 @@
                     <router-link  to="/edit/pages" class="nav-link">Pages</router-link>
                 </li>
                 <li class="nav-item active">
-                    <router-link  to="/edit" class="nav-link">CmsEdit</router-link>
+                    <a href="" v-on:click="move_action('/edit');" class="nav-link">CmsEdit</a>                    
                 </li>
             </ul>
 			<!-- right_nav -->
