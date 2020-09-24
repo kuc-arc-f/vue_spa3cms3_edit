@@ -1,7 +1,15 @@
 <template>
     <div class="container">
-        <router-link :to="'/edit/pages'" class="btn btn-outline-primary mt-2">Back
-        </router-link>
+        <div class="row">
+            <div class="col-sm-6">
+                <router-link :to="'/edit/pages'" class="btn btn-outline-primary mt-2">Back
+                </router-link>
+            </div>
+            <div class="col-sm-6">
+                <router-link :to="'/edit/pages/edit/'+ id" class="btn btn-outline-primary mt-2">Edit
+                </router-link>
+            </div>
+        </div>        
         <hr class="mt-2 mb-2" />        
         <h3>title : {{ title }}</h3>
         ID : {{ id }}<br />

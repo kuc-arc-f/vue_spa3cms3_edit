@@ -1,7 +1,15 @@
 <template lang="html">
     <div class="container task_edit_wrap">
-        <router-link :to="'/edit'" class="btn btn-outline-primary mt-2">Back
-        </router-link>
+        <div class="row">
+            <div class="col-sm-6">
+            <router-link :to="'/edit'" class="btn btn-outline-primary mt-2">Back
+            </router-link>
+            </div>
+            <div class="col-sm-6">
+                <button v-on:click="previews_item(id);" class="btn btn-outline-primary mt-2">Show
+                </button>                
+            </div>
+        </div>
         <hr class="mt-2 mb-2" />
         <h3>CmsEdit - edit</h3>
         id: {{id}}
@@ -74,7 +82,7 @@ export default {
             var self = this
             db.category.toArray().then(function ( data ) {
                 self.category_items = data
-console.log( self.category_items )
+// console.log( self.category_items )
             });       
         },        
         async get_item(id){
@@ -85,10 +93,17 @@ console.log( self.category_items )
             if( parseInt(item.category.id) != 0){
                 this.category_save_id = item.category.save_id                  
             }   
-            console.log(item.category );                          
+//            console.log(item.category );                          
         }, 
+        async previews_item(task_id){
+            await db.cms_edit.update(parseInt(task_id) , {
+                title: this.title,
+                content: this.content,
+            });
+            this.$router.push('/edit/show/'+ task_id )
+        },
         update_item(task_id){
-console.log( this.title )
+// console.log( this.title )
 //console.log( id )
             db.cms_edit.update(parseInt(task_id) , {
                 title: this.title,

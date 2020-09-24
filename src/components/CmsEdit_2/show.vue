@@ -1,7 +1,15 @@
 <template>
     <div class="container">
-        <router-link :to="'/edit'" class="btn btn-outline-primary mt-2">Back
-        </router-link>
+        <div class="row">
+            <div class="col-sm-6">
+                <router-link :to="'/edit'" class="btn btn-outline-primary mt-2">Back
+                </router-link>
+            </div>
+            <div class="col-sm-6">
+                <router-link :to="'/edit/edit/'+ id" class="btn btn-outline-primary mt-2">Edit
+                </router-link>
+            </div>
+        </div>
         <hr class="mt-2 mb-2" />        
         <h3>title : {{ title }}</h3>
         ID : {{ id }}<br />
@@ -48,13 +56,11 @@ export default {
             const item = await db.cms_edit.get(id);
             this.title = item.title
             this.content = marked(item.content)
-//            this.content = item.content   
-            // this.create = item.created_at
             this.create = LibCommon.formatDate(item.created_at, 'YYYY-MM-DD hh:mm') 
             if(item.category.name != null){
                 this.category_name = item.category.name    
             }
-console.log('data: ', item.category ) 
+// console.log('data: ', item.category ) 
         },
     }
 }

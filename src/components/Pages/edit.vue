@@ -1,7 +1,16 @@
 <template lang="html">
     <div class="container task_edit_wrap">
-        <router-link :to="'/edit/pages'" class="btn btn-outline-primary mt-2">Back
-        </router-link>
+        <div class="row">
+            <div class="col-sm-6">
+                <router-link :to="'/edit/pages'" class="btn btn-outline-primary mt-2">Back
+                </router-link>
+            </div>
+            <div class="col-sm-6">
+                <button v-on:click="previews_item(id);" class="btn btn-outline-primary mt-2">Show
+                </button>                
+            </div>
+        </div>
+
         <hr class="mt-2 mb-2" />
         <h3>Pages - edit</h3>
         id: {{id}}
@@ -66,6 +75,13 @@ export default {
             this.content = item.content
 //            console.log(item.category );                          
         }, 
+        async previews_item(task_id){
+            await db.pages.update(parseInt(task_id) , {
+                title: this.title,
+                content: this.content,
+            });
+            this.$router.push('/edit/pages/show/'+ task_id)
+        },
         update_item(task_id){
 console.log( this.title )
 //console.log( id )

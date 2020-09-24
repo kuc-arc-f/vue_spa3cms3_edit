@@ -63,7 +63,7 @@ console.log(num)
                 category: category,
                 show_id: dt,
                 title: "title-" + num,
-                content: "content-"+ num,
+                content: "title-",
                 created_at: new Date(),
             }
             db.cms_edit.add( task)
